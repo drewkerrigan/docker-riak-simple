@@ -1,6 +1,6 @@
 #! /bin/bash
 
-if docker ps -a | grep "drewkerrigan/basho-bench" >/dev/null; then
+if docker ps -a | grep "drewkerrigan/riak-simple" >/dev/null; then
   echo ""
   echo "It looks like you already have some Riak containers running."
   echo "Please take them down before attempting to bring up another"
@@ -8,7 +8,7 @@ if docker ps -a | grep "drewkerrigan/basho-bench" >/dev/null; then
   echo ""
   echo "  make stop"
   echo "    or"
-  echo "  make stop-docker-riak-simple"
+  echo "  make stop-riak"
   echo ""
 
   exit 1
@@ -18,9 +18,9 @@ echo
 echo "Bringing up riak node:"
 echo
 
-docker run -P --name "riak" -d drewkerrigan/basho-bench > /dev/null 2>&1
+docker run -P --name "riak" -d drewkerrigan/riak-simple > /dev/null 2>&1
 
-CONTAINER_ID=$(docker ps | egrep "drewkerrigan/basho-bench" | cut -d" " -f1)
+CONTAINER_ID=$(docker ps | egrep "drewkerrigan/riak-simple" | cut -d" " -f1)
 CONTAINER_PORT=$(docker port "${CONTAINER_ID}" 8098 | cut -d ":" -f2)
 
 echo "Attepmting to contact http://localhost:${CONTAINER_PORT}/ping"

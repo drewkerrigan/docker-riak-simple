@@ -5,9 +5,8 @@ MAINTAINER Drew Kerrigan dkerrigan@basho.com
 
 # Environmental variables
 ENV DEBIAN_FRONTEND noninteractive
-RIAK_SHORT_VERSION 2.0
-ENV RIAK_VERSION 2.0.0beta1 # Riak 2.0 beta 1
-ENV RIAK_URL http://s3.amazonaws.com/downloads.basho.com/riak/${RIAK_SHORT_VERSION}/${RIAK_VERSION}/ubuntu/precise/riak_${RIAK_VERSION}-1_amd64.deb # All other Riaks
+ENV RIAK_SHORT_VERSION 2.0
+ENV RIAK_VERSION 2.0.0beta1
 
 # Install Java 7
 RUN sed -i.bak 's/main$/main universe/' /etc/apt/sources.list
@@ -17,7 +16,7 @@ RUN apt-get update -qq && apt-get install -y python-software-properties && \
     apt-get install -y oracle-java7-installer -y
 
 # Install Riak
-ADD ${RIAK_URL}
+ADD http://s3.amazonaws.com/downloads.basho.com/riak/${RIAK_SHORT_VERSION}/${RIAK_VERSION}/ubuntu/precise/riak_${RIAK_VERSION}-1_amd64.deb /
 RUN (cd / && dpkg -i "riak_${RIAK_VERSION}-1_amd64.deb")
 
 # Setup the Riak service

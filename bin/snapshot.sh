@@ -4,7 +4,7 @@ echo
 echo "Creating Snapshot of current container"
 echo
 
-CONTAINER_ID=$(docker ps | egrep "drewkerrigan/basho-bench" | cut -d" " -f1)
+CONTAINER_ID=$(docker ps | egrep "drewkerrigan/riak-simple" | cut -d" " -f1)
 
 docker commit ${CONTAINER_ID} riak_snapshot
 
